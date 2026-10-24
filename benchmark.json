@@ -1,0 +1,362 @@
+[
+  {
+    "scenario": "balanced",
+    "policy": "static",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 4,
+      "training_gpus": 4,
+      "sandbox_workers": 8,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "static allocation",
+    "metrics": {
+      "completed": 101,
+      "trained": 72,
+      "failed": 0,
+      "stale_dropped": 28,
+      "valid_trajectories_per_s": 0.84167,
+      "trained_samples_per_s": 0.6,
+      "inference_wait_s": 45.509,
+      "sandbox_wait_s": 14.3019,
+      "trainer_busy_s": 72.0
+    }
+  },
+  {
+    "scenario": "balanced",
+    "policy": "independent",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 4,
+      "training_gpus": 4,
+      "sandbox_workers": 10,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "independent queue-threshold scaling",
+    "metrics": {
+      "completed": 89,
+      "trained": 68,
+      "failed": 0,
+      "stale_dropped": 18,
+      "valid_trajectories_per_s": 0.74167,
+      "trained_samples_per_s": 0.56667,
+      "inference_wait_s": 17.4127,
+      "sandbox_wait_s": 0.0,
+      "trainer_busy_s": 68.0
+    }
+  },
+  {
+    "scenario": "balanced",
+    "policy": "global",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 4,
+      "training_gpus": 4,
+      "sandbox_workers": 8,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "global candidate search: predicted 1.0000 -> 1.0000 valid trajectories/s",
+    "metrics": {
+      "completed": 101,
+      "trained": 72,
+      "failed": 0,
+      "stale_dropped": 28,
+      "valid_trajectories_per_s": 0.84167,
+      "trained_samples_per_s": 0.6,
+      "inference_wait_s": 45.509,
+      "sandbox_wait_s": 14.3019,
+      "trainer_busy_s": 72.0
+    }
+  },
+  {
+    "scenario": "inference",
+    "policy": "static",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 4,
+      "training_gpus": 4,
+      "sandbox_workers": 8,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "static allocation",
+    "metrics": {
+      "completed": 19,
+      "trained": 12,
+      "failed": 0,
+      "stale_dropped": 7,
+      "valid_trajectories_per_s": 0.15833,
+      "trained_samples_per_s": 0.1,
+      "inference_wait_s": 3282.1682,
+      "sandbox_wait_s": 0.0,
+      "trainer_busy_s": 12.0
+    }
+  },
+  {
+    "scenario": "inference",
+    "policy": "independent",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 4,
+      "training_gpus": 4,
+      "sandbox_workers": 10,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "independent queue-threshold scaling",
+    "metrics": {
+      "completed": 19,
+      "trained": 12,
+      "failed": 0,
+      "stale_dropped": 7,
+      "valid_trajectories_per_s": 0.15833,
+      "trained_samples_per_s": 0.1,
+      "inference_wait_s": 3282.1682,
+      "sandbox_wait_s": 0.0,
+      "trainer_busy_s": 12.0
+    }
+  },
+  {
+    "scenario": "inference",
+    "policy": "global",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 6,
+      "training_gpus": 2,
+      "sandbox_workers": 8,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "global candidate search: predicted 0.2667 -> 0.4000 valid trajectories/s",
+    "metrics": {
+      "completed": 40,
+      "trained": 12,
+      "failed": 0,
+      "stale_dropped": 22,
+      "valid_trajectories_per_s": 0.33333,
+      "trained_samples_per_s": 0.1,
+      "inference_wait_s": 2622.559,
+      "sandbox_wait_s": 0.0,
+      "trainer_busy_s": 27.4337
+    }
+  },
+  {
+    "scenario": "sandbox",
+    "policy": "static",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 4,
+      "training_gpus": 4,
+      "sandbox_workers": 8,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "static allocation",
+    "metrics": {
+      "completed": 29,
+      "trained": 12,
+      "failed": 0,
+      "stale_dropped": 17,
+      "valid_trajectories_per_s": 0.24167,
+      "trained_samples_per_s": 0.1,
+      "inference_wait_s": 0.1762,
+      "sandbox_wait_s": 2554.2747,
+      "trainer_busy_s": 12.0
+    }
+  },
+  {
+    "scenario": "sandbox",
+    "policy": "independent",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 4,
+      "training_gpus": 4,
+      "sandbox_workers": 10,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "independent queue-threshold scaling",
+    "metrics": {
+      "completed": 36,
+      "trained": 12,
+      "failed": 0,
+      "stale_dropped": 24,
+      "valid_trajectories_per_s": 0.3,
+      "trained_samples_per_s": 0.1,
+      "inference_wait_s": 0.0,
+      "sandbox_wait_s": 2268.0251,
+      "trainer_busy_s": 12.0
+    }
+  },
+  {
+    "scenario": "sandbox",
+    "policy": "global",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 4,
+      "training_gpus": 4,
+      "sandbox_workers": 24,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "global candidate search: predicted 0.3333 -> 1.0000 valid trajectories/s",
+    "metrics": {
+      "completed": 78,
+      "trained": 36,
+      "failed": 0,
+      "stale_dropped": 42,
+      "valid_trajectories_per_s": 0.65,
+      "trained_samples_per_s": 0.3,
+      "inference_wait_s": 0.6121,
+      "sandbox_wait_s": 93.9802,
+      "trainer_busy_s": 36.0
+    }
+  },
+  {
+    "scenario": "training",
+    "policy": "static",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 4,
+      "training_gpus": 4,
+      "sandbox_workers": 8,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "static allocation",
+    "metrics": {
+      "completed": 106,
+      "trained": 16,
+      "failed": 0,
+      "stale_dropped": 32,
+      "valid_trajectories_per_s": 0.88333,
+      "trained_samples_per_s": 0.13333,
+      "inference_wait_s": 1.8299,
+      "sandbox_wait_s": 0.0,
+      "trainer_busy_s": 114.3069
+    }
+  },
+  {
+    "scenario": "training",
+    "policy": "independent",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 4,
+      "training_gpus": 4,
+      "sandbox_workers": 10,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "independent queue-threshold scaling",
+    "metrics": {
+      "completed": 106,
+      "trained": 16,
+      "failed": 0,
+      "stale_dropped": 32,
+      "valid_trajectories_per_s": 0.88333,
+      "trained_samples_per_s": 0.13333,
+      "inference_wait_s": 1.8299,
+      "sandbox_wait_s": 0.0,
+      "trainer_busy_s": 114.3069
+    }
+  },
+  {
+    "scenario": "training",
+    "policy": "global",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 1,
+      "training_gpus": 7,
+      "sandbox_workers": 8,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "global candidate search: predicted 0.1667 -> 0.2917 valid trajectories/s",
+    "metrics": {
+      "completed": 69,
+      "trained": 24,
+      "failed": 0,
+      "stale_dropped": 41,
+      "valid_trajectories_per_s": 0.575,
+      "trained_samples_per_s": 0.2,
+      "inference_wait_s": 2853.5764,
+      "sandbox_wait_s": 0.0,
+      "trainer_busy_s": 83.2083
+    }
+  },
+  {
+    "scenario": "dynamic",
+    "policy": "static",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 4,
+      "training_gpus": 4,
+      "sandbox_workers": 8,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "static allocation",
+    "metrics": {
+      "completed": 65,
+      "trained": 24,
+      "failed": 0,
+      "stale_dropped": 41,
+      "valid_trajectories_per_s": 0.54167,
+      "trained_samples_per_s": 0.2,
+      "inference_wait_s": 1434.5751,
+      "sandbox_wait_s": 396.2673,
+      "trainer_busy_s": 24.0
+    }
+  },
+  {
+    "scenario": "dynamic",
+    "policy": "independent",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 4,
+      "training_gpus": 4,
+      "sandbox_workers": 10,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "independent queue-threshold scaling",
+    "metrics": {
+      "completed": 64,
+      "trained": 24,
+      "failed": 0,
+      "stale_dropped": 40,
+      "valid_trajectories_per_s": 0.53333,
+      "trained_samples_per_s": 0.2,
+      "inference_wait_s": 2042.9922,
+      "sandbox_wait_s": 6.7351,
+      "trainer_busy_s": 24.0
+    }
+  },
+  {
+    "scenario": "dynamic",
+    "policy": "global",
+    "seed": 42,
+    "duration_s": 120.0,
+    "allocation": {
+      "inference_gpus": 5,
+      "training_gpus": 3,
+      "sandbox_workers": 9,
+      "rollout_concurrency": 32
+    },
+    "plan_reason": "global candidate search: predicted 0.6667 -> 0.7500 valid trajectories/s",
+    "metrics": {
+      "completed": 72,
+      "trained": 24,
+      "failed": 0,
+      "stale_dropped": 46,
+      "valid_trajectories_per_s": 0.6,
+      "trained_samples_per_s": 0.2,
+      "inference_wait_s": 326.657,
+      "sandbox_wait_s": 1286.7548,
+      "trainer_busy_s": 32.0
+    }
+  }
+]

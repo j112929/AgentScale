@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "agentscale"
+version = "0.1.0a0"
+description = "Offline-first global resource scheduling research platform for agentic RL"
+requires-python = ">=3.11"
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.10"]
+[project.scripts]
+agentscale = "agentscale.cli:main"
+[tool.setuptools.packages.find]
+include = ["agentscale*"]
+[tool.ruff]
+line-length = 100
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
