@@ -167,11 +167,12 @@ def test_observed_constraint_misses_are_reported_and_calibrated():
             )
 
     controller = make(backend=SlowBackend())
-    submit(controller)
+    submit(controller, constraints=Constraints(max_cost_units=0.5))
     controller.tick(state())
     controller.tick(state(6))
     completion = controller.completions[0]
     assert not completion.deadline_met and not completion.quality_met
+    assert not completion.cost_met
     assert controller.planner.optimizer.estimators.observations == 1
 
 

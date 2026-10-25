@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Optional deterministic retrieval plan templates and fake backend, separate
+  quality/latency/cost estimators and a constrained adaptive optimizer.
+- Queue-aware pending-request control, shared RL reservations, policy/adapter
+  fences and opt-in same-clock simulator hooks, including safe RL rollback.
+- Retrieval dry-run/simulation/benchmark commands, paired synthetic results,
+  compatibility tests and explicit real-RAG evaluation boundaries.
+
 ## 0.1.0rc1
 
 - Deterministic queued simulator, guarded dynamic scheduling and compensation.

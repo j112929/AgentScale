@@ -9,6 +9,7 @@ from .backend import FakeRetrievalBackend, RetrievalBackend
 from .integration import ReservationLedger, residual_capacity
 from .models import (
     Constraints,
+    Estimate,
     Query,
     QueueState,
     Resources,
@@ -56,6 +57,7 @@ class RetrievalDecision:
     status: str
     reason: str
     plan: RetrievalPlan | None = None
+    estimate: Estimate | None = None
 
 
 @dataclass(frozen=True)
@@ -69,6 +71,7 @@ class Completion:
     cost_units: float
     deadline_met: bool
     quality_met: bool
+    cost_met: bool
 
 
 @dataclass(frozen=True)
@@ -143,9 +146,15 @@ class RetrievalController:
         return len(self._running)
 
     def _record(
-        self, now: float, query_id: str, status: str, reason: str, plan: RetrievalPlan | None = None
+        self,
+        now: float,
+        query_id: str,
+        status: str,
+        reason: str,
+        plan: RetrievalPlan | None = None,
+        estimate: Estimate | None = None,
     ) -> None:
-        self.history.append(RetrievalDecision(now, query_id, status, reason, plan))
+        self.history.append(RetrievalDecision(now, query_id, status, reason, plan, estimate))
 
     def submit(self, query: Query, constraints: Constraints, submitted_s: float) -> bool:
         nonnegative(submitted_s, "submission time")
@@ -185,6 +194,7 @@ class RetrievalController:
                     cost,
                     latency <= request.constraints.max_latency_s + 1e-12,
                     result.quality >= request.constraints.min_quality - 1e-12,
+                    cost <= request.constraints.max_cost_units + 1e-12,
                 )
             )
             self._record(job.finished_s, key, "completed", "synthetic completion", result.plan)
@@ -306,6 +316,14 @@ class RetrievalController:
                         now - request.changed_s < cfg.cooldown_s
                         or gain <= abs(old_utility) * cfg.min_relative_gain
                     ):
+                        self._record(
+                            now,
+                            key,
+                            "retained",
+                            "cooldown or benefit margin retains plan",
+                            old.plan,
+                            old_estimate,
+                        )
                         candidate = Candidate(old.plan, old_estimate, old_utility)
             if request.candidate is not None and candidate.plan == request.candidate.plan:
                 request.confirmations += 1
@@ -351,5 +369,12 @@ class RetrievalController:
             self.resource_intervals.append(
                 ResourceInterval(now, now + answer.service_s, candidate.estimate.resources)
             )
-            self._record(now, key, "admitted", "reserved shared resources", candidate.plan)
+            self._record(
+                now,
+                key,
+                "admitted",
+                "reserved shared resources",
+                candidate.plan,
+                candidate.estimate,
+            )
         return tuple(self.history[start:])

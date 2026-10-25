@@ -16,6 +16,8 @@ jobs:
       - run: ruff check agentscale tests examples tools
       - run: mypy agentscale
       - run: agentscale simulate --scenario dynamic --duration 30 --output /tmp/simulation.json
+      - run: agentscale retrieval-plan --query 'offline retrieval smoke test' --dry-run
+      - run: agentscale retrieval-simulate --duration 3 --output /tmp/retrieval.json
   ray:
     runs-on: ubuntu-latest
     timeout-minutes: 10

@@ -82,6 +82,7 @@ class SyntheticCostEstimator:
             + 0.001 * plan.top_k
             + 0.002 * plan.rerank_k
             + service_s * (0.03 * resources.cpu_cores + 0.5 * resources.gpus)
+            + 0.0001 * (128 + 64 * plan.top_k)
         )
 
 

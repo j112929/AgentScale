@@ -144,3 +144,51 @@ def test_simulator_callbacks_share_live_four_stage_queues_and_fence_all_writes()
     )
     assert retrieval.completions and result.trained > 0
     assert any(s.inference_queue or s.sandbox_queue or s.training_buffer for s in observed)
+
+
+def test_measured_rl_rollback_waits_for_reservations_and_then_recovers():
+    capacity = Capacity(cpu_cores=20, memory_gb=48)
+    workload = Workload(
+        steps=1, batch_size=1, training_s=20, inference_s=0.1, sandbox_s=0.1, arrival_per_s=100
+    )
+    old, target = Allocation(sandbox_workers=10), Allocation(3, 5, 8, 32)
+    adapter = FakeAdapter(old, capacity, workload)
+    ledger = ReservationLedger()
+    fenced = ReservationAwareAdapter(adapter, ledger, capacity, workload)
+
+    class Policy:
+        desired = old
+
+        def propose(self, snapshot):
+            return Plan(self.desired, "trial", 1, 1)
+
+    policy = Policy()
+    controller = DynamicController(
+        ReservationAwarePolicy(policy, ledger),
+        fenced,
+        ControllerConfig(
+            interval_s=1,
+            confirmations=1,
+            cooldown_s=0,
+            observation_window_s=2,
+            min_relative_gain=0,
+            switch_s_per_unit=0,
+        ),
+    )
+
+    def snapshot(at, rate):
+        return Snapshot(
+            at, adapter.observe(), capacity, workload, timestamp_s=at, trained_samples_per_s=rate
+        )
+
+    for at in (0, 1, 2):
+        controller.tick(snapshot(at, 1))
+    policy.desired = target
+    assert controller.tick(snapshot(3, 1)).status == "applied"
+    ledger.reserve("rag", Resources(4, 4), snapshot(3, 1))
+    assert controller.tick(snapshot(4, 0)).status == "observing"
+    assert controller.tick(snapshot(5, 0)).status == "rollback_deferred"
+    assert adapter.observe() == target and not controller.faulted
+    ledger.release("rag")
+    assert controller.tick(snapshot(6, 0)).status == "rolled_back"
+    assert adapter.observe() == old

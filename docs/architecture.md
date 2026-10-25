@@ -48,3 +48,17 @@ source files. `vllm_adapter.py` implements public HTTP inference and metrics con
 versioned samples and runtime-owned training transaction hooks. `runtime_benchmark.py`
 keeps measured CPU container completions separate from measured RL fresh samples.
 See runtime-integrations.md for validation boundaries and missing GPU actuators.
+
+## Optional experimental retrieval
+
+`retrieval/` separates typed search plans/backends, independent quality/latency/cost
+models, constrained optimization and pending-request feedback control. A shared
+reservation ledger derives its budget from the existing RL Snapshot. Opt-in policy
+and adapter wrappers constrain RL proposals and every write, including rollback;
+the RL policies/controller continue to own resource allocation.
+
+The simulator's optional `on_snapshot` and `transition_guard` callbacks couple both
+controllers without changing default scheduling. Retrieval only emulates strategy
+templates with a deterministic fake backend. No real RAG quality or GPU validation
+is implied. See [retrieval architecture and compatibility](retrieval.md),
+[synthetic benchmarks](retrieval-benchmarks.md) and [baseline audit](retrieval-audit.md).
