@@ -1,0 +1,16 @@
+{
+  "verl": {
+    "version": "0.6.1",
+    "revision": "d62da4950573d7a4b7ef2362337952e7ab59e78d",
+    "sha256": {
+      "verl/tools/base_tool.py": "2a6ab14f689b9f44b8aa96f0bb881a2013a6c656bcb8ec088930bf8a4d2fc739",
+      "verl/tools/schemas.py": "ee6c170b6a8eb16f8098885785bdaf2f91ac76e12a9379c311dd1f643ccfcaea",
+      "verl/utils/rollout_trace.py": "28ba6d3e4d33b615bd7c094a7303c1345f7fb1e5c47cf5fded078ee2dbd4db0f",
+      "verl/version/version": "87b241b275c591694846560e9879f50c9da3150f854efdabd782c539772f3033"
+    }
+  },
+  "vllm": {
+    "interface_version": "0.11.0",
+    "validation": "HTTP contract only; no GPU runtime"
+  }
+}

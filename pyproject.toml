@@ -1,13 +1,17 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "agentscale"
-version = "0.1.0a0"
+version = "0.1.0rc1"
 description = "Offline-first global resource scheduling research platform for agentic RL"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
 requires-python = ">=3.11"
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.10"]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.10", "pydantic>=2.10,<3"]
+release = ["build>=1.2", "twine>=6", "wheel"]
 ray = ["ray==2.50.1"]
 [project.scripts]
 agentscale = "agentscale.cli:main"
@@ -23,4 +27,4 @@ line-length = 100
 python_version = "3.11"
 check_untyped_defs = true
 [tool.pytest.ini_options]
-markers = ["ray: real local Ray Actor integration (requires the ray extra)"]
+markers = ["ray: real local Ray Actor integration (requires the ray extra)", "docker: real container isolation tests (requires Linux Docker and the pinned image)"]

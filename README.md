@@ -5,7 +5,37 @@
 AgentScale simulates rollout → inference → sandbox → training and continuously
 replans resource allocation as demand changes. It includes a guarded control loop
 and an optional **Ray 2.50.1 Actor pool** for trusted synthetic sandbox operations.
-Real verl/vLLM integration, isolated code execution and real GPU migration remain future work.
+A restricted Docker backend now executes real source files and tests. vLLM HTTP and
+verl tool interfaces are experimental; full GPU training and migration remain unvalidated.
+
+
+## v0.1 release candidate: local runtime integrations
+
+Version **0.1.0rc1** adds real restricted Docker execution, a coding-repair loop,
+vLLM inference/metrics clients, a native verl 0.6.1 tool plugin, policy-versioned
+experience, measured container benchmarks and Apache-2.0 licensing. GPU integration
+validation remains open; this is a CPU/container-validated release candidate.
+
+```bash
+python -m pip install -e '.[dev,release]'
+docker pull python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c
+python examples/container_coding.py
+pytest -q -m docker
+python tools/check_verl_contract.py --download --execute
+agentscale container-benchmark --output container-results.json
+# With a separately provisioned vLLM server:
+agentscale vllm-inspect --url http://127.0.0.1:8000 --model agentscale-demo
+python examples/container_coding.py --vllm-url http://127.0.0.1:8000 --model agentscale-demo
+python tools/build_release.py --output dist
+```
+
+The default coding demo uses a **scripted inference fixture** and real containers.
+Passing `--vllm-url` replaces that fixture with real HTTP inference. The verl contract
+check loads genuine pinned BaseTool/schema modules without importing a full trainer.
+See [runtime integration and limits](docs/runtime-integrations.md),
+[measured container results](docs/container-benchmarks.md),
+[release procedure](docs/release.md), [contribution guide](CONTRIBUTING.md) and
+[security scope](SECURITY.md).
 
 ## Quick start (no Ray or GPUs required)
 
@@ -14,7 +44,7 @@ python -m pip install -e '.[dev]'
 agentscale simulate --scenario dynamic --policy global --duration 600 --trace --output trace.json
 agentscale plan --scenario sandbox --dry-run
 agentscale benchmark --duration 600 --seeds 42 43 44 --output closed-loop.json
-pytest -q -m 'not ray'
+pytest -q -m 'not ray and not docker'
 ruff check agentscale tests examples
 mypy agentscale
 ```

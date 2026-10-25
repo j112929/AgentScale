@@ -38,3 +38,13 @@ election remain outside this slice.
 
 See [control loop](control-loop.md), [Ray integration](ray-sandbox.md) and
 [benchmark methodology](benchmarks.md).
+
+## Local runtime modules
+
+`sandbox.py` provides restricted Docker execution and a resource-aware bounded pool.
+`coding.py` consumes an inference client and container feedback to repair editable
+source files. `vllm_adapter.py` implements public HTTP inference and metrics contracts.
+`integrations/verl_tool.py` is the optional native tool plugin. `experience.py` holds
+versioned samples and runtime-owned training transaction hooks. `runtime_benchmark.py`
+keeps measured CPU container completions separate from measured RL fresh samples.
+See runtime-integrations.md for validation boundaries and missing GPU actuators.

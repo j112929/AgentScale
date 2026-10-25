@@ -1,0 +1,6 @@
+AgentScale
+Copyright 2026 AgentScale contributors.
+
+Licensed under the Apache License, Version 2.0.
+Optional integrations use public APIs of Docker, Ray, vLLM and verl.
+No upstream model weights or GPU runtime binaries are distributed in this package.

@@ -1,0 +1,722 @@
+{
+  "schema_version": 1,
+  "backend": "real-docker",
+  "synthetic_inference": true,
+  "rl_training": false,
+  "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+  "capacity": {
+    "gpus": 2,
+    "cpu_cores": 2,
+    "memory_gb": 2
+  },
+  "limits": {
+    "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+    "cpus": 1,
+    "memory_mb": 256,
+    "pids": 64,
+    "work_mb": 64,
+    "output_bytes": 32768
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "backend": "real-docker",
+      "policy": "independent",
+      "seed": 42,
+      "tasks": 6,
+      "elapsed_s": 1.1193502920214087,
+      "passed": 6,
+      "completed_tasks_per_s": 5.360252320267626,
+      "latency_p50_s": 0.7381895418511704,
+      "latency_p95_s": 1.1142484901938587,
+      "latency_p99_s": 1.1142491652164608,
+      "oldest_queue_p95_s": 0.6817587703699246,
+      "allocation_changes": 1,
+      "results": [
+        {
+          "task_id": "0",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03488808400004473,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "1",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07056737499999599,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "3",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07024412499998789,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "2",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03482820900001116,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "4",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.034264791999987665,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "5",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.0673589579999998,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        }
+      ]
+    },
+    {
+      "backend": "real-docker",
+      "policy": "static",
+      "seed": 42,
+      "tasks": 6,
+      "elapsed_s": 2.124846792081371,
+      "passed": 6,
+      "completed_tasks_per_s": 2.82373299682598,
+      "latency_p50_s": 1.2600717711029574,
+      "latency_p95_s": 2.03377963550156,
+      "latency_p99_s": 2.1020048270816916,
+      "oldest_queue_p95_s": 1.6661658672615884,
+      "allocation_changes": 0,
+      "results": [
+        {
+          "task_id": "0",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03550070799997229,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "1",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.06941941700000598,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "2",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.0391979589999778,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "3",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07423862499996403,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "4",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.036669875000029606,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "5",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07026091599999518,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        }
+      ]
+    },
+    {
+      "backend": "real-docker",
+      "policy": "global",
+      "seed": 42,
+      "tasks": 6,
+      "elapsed_s": 1.117871583905071,
+      "passed": 6,
+      "completed_tasks_per_s": 5.367342802507015,
+      "latency_p50_s": 0.6950892920140177,
+      "latency_p95_s": 1.1032844171859324,
+      "latency_p99_s": 1.1103806505911051,
+      "oldest_queue_p95_s": 0.6399762609042227,
+      "allocation_changes": 1,
+      "results": [
+        {
+          "task_id": "0",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03872554100001935,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "1",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.06816512499995042,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "3",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.06713683300000639,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "2",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.038495166000018344,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "4",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.0385647919999883,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "5",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.06762712500000134,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        }
+      ]
+    },
+    {
+      "backend": "real-docker",
+      "policy": "global",
+      "seed": 43,
+      "tasks": 6,
+      "elapsed_s": 1.0878232920076698,
+      "passed": 6,
+      "completed_tasks_per_s": 5.5156017011977125,
+      "latency_p50_s": 0.7127401460893452,
+      "latency_p95_s": 1.082054166821763,
+      "latency_p99_s": 1.0820547334384174,
+      "oldest_queue_p95_s": 0.6529151379596443,
+      "allocation_changes": 1,
+      "results": [
+        {
+          "task_id": "0",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.039127083999972,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "1",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.0329156249999869,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "2",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03568512499998633,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "3",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03327241699997785,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "4",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07069250000000693,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "5",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03884162499997501,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        }
+      ]
+    },
+    {
+      "backend": "real-docker",
+      "policy": "independent",
+      "seed": 43,
+      "tasks": 6,
+      "elapsed_s": 1.103796083945781,
+      "passed": 6,
+      "completed_tasks_per_s": 5.435786634204732,
+      "latency_p50_s": 0.7252486458746716,
+      "latency_p95_s": 1.098492510674987,
+      "latency_p99_s": 1.0984930357080884,
+      "oldest_queue_p95_s": 0.6751290916465222,
+      "allocation_changes": 1,
+      "results": [
+        {
+          "task_id": "1",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03721416700000191,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "0",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.06936674999997194,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "2",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03730779199997869,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "3",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03458745800003271,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "4",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.06901729100002285,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "5",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03735058299997718,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        }
+      ]
+    },
+    {
+      "backend": "real-docker",
+      "policy": "static",
+      "seed": 43,
+      "tasks": 6,
+      "elapsed_s": 2.0846670840401202,
+      "passed": 6,
+      "completed_tasks_per_s": 2.8781574026543835,
+      "latency_p50_s": 1.2169149795081466,
+      "latency_p95_s": 1.9962923755520023,
+      "latency_p99_s": 2.0627818423439748,
+      "oldest_queue_p95_s": 1.6360765527584589,
+      "allocation_changes": 0,
+      "results": [
+        {
+          "task_id": "0",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03882375000000593,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "1",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.01816529199999195,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "2",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.037342416999990746,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "3",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03850875000000542,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "4",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07310187499996346,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "5",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.03874474999997801,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        }
+      ]
+    },
+    {
+      "backend": "real-docker",
+      "policy": "global",
+      "seed": 44,
+      "tasks": 6,
+      "elapsed_s": 1.152531333034858,
+      "passed": 6,
+      "completed_tasks_per_s": 5.205932218953852,
+      "latency_p50_s": 0.7629064165521413,
+      "latency_p95_s": 1.1299465417978354,
+      "latency_p99_s": 1.1439850084134378,
+      "oldest_queue_p95_s": 0.7201917064143344,
+      "allocation_changes": 1,
+      "results": [
+        {
+          "task_id": "0",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.0717406250000181,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "1",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07688266700000668,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "2",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07159391599998344,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "3",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07140574999999671,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "4",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07066908299998431,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "5",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.06495591700002024,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        }
+      ]
+    },
+    {
+      "backend": "real-docker",
+      "policy": "static",
+      "seed": 44,
+      "tasks": 6,
+      "elapsed_s": 2.124949541175738,
+      "passed": 6,
+      "completed_tasks_per_s": 2.82359645899177,
+      "latency_p50_s": 1.2329067705431953,
+      "latency_p95_s": 2.0315887395991012,
+      "latency_p99_s": 2.1012702479725704,
+      "oldest_queue_p95_s": 1.6584047105745412,
+      "allocation_changes": 0,
+      "results": [
+        {
+          "task_id": "0",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07603274999996756,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "1",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.0724884999999631,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "2",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.0729970000000435,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "3",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07438437499996553,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "4",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07248350000003256,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "5",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07127416600002334,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        }
+      ]
+    },
+    {
+      "backend": "real-docker",
+      "policy": "independent",
+      "seed": 44,
+      "tasks": 6,
+      "elapsed_s": 1.152249624952674,
+      "passed": 6,
+      "completed_tasks_per_s": 5.207204992795234,
+      "latency_p50_s": 0.7373853749595582,
+      "latency_p95_s": 1.1417441151570529,
+      "latency_p99_s": 1.146095990156755,
+      "oldest_queue_p95_s": 0.6959786463994532,
+      "allocation_changes": 1,
+      "results": [
+        {
+          "task_id": "0",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07254875000000993,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "1",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07147291600000472,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "2",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07012633400000823,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "3",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.06567433300000403,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "5",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.0663972920000333,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        },
+        {
+          "task_id": "4",
+          "status": "passed",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration_s": 0.07192137499998807,
+          "truncated": false,
+          "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+        }
+      ]
+    }
+  ],
+  "unavailable_baselines": {
+    "verl-native": "requires a GPU RL training environment"
+  },
+  "runtime_environment": {
+    "docker_version": "29.8.0",
+    "architecture": "aarch64",
+    "daemon_cpus": 16,
+    "daemon_memory_bytes": 8318709760,
+    "cgroup_version": "2",
+    "python_version": "3.12.12"
+  }
+}
