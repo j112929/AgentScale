@@ -22,6 +22,25 @@ This is an orchestration/control-plane project, **not** a new RL algorithm, infe
 
 Commands, semantics and limitations are in `README.md` and `docs/`.
 
+## Local runtime integration update
+
+- **M5.2 locally validated:** real source/test execution in restricted Docker containers,
+  CPU/memory/PID limits, no network/host mounts, timeout/output bounds, queue telemetry,
+  safe scale-in and coding-repair feedback.
+- **M5.3 interface slice:** public vLLM HTTP inference and model-filtered Prometheus
+  parsing, local HTTP contract tests, explicit rejection of unsupported GPU resizing.
+- **M5.4 interface slice:** native verl 0.6.1 BaseTool plugin checked against genuine
+  pinned lightweight upstream modules plus Docker; bounded versioned experience and
+  training/sync transaction contracts. No concrete GPU-sharing actuator is enabled.
+- **M6 local slice:** nine real container trials across three policies and seeds;
+  strict paired external RL comparison tooling with bootstrap intervals. Full RL
+  training and the verl-native benchmark are unavailable without GPU infrastructure.
+- **M7 candidate:** Apache-2.0, community/security docs, container CI, reproducible
+  source/wheel packaging for 0.1.0rc1. Stable GPU validation remains a later gate.
+
+This iteration follows the user's local-validation scope. It does not mark the entire
+M5–M7 roadmap complete. See `docs/runtime-integrations.md` and `docs/release.md`.
+
 ## Non-negotiable engineering rules
 1. Inspect the repository before editing. If it is empty, bootstrap a minimal Python package.
 2. Work in small, testable vertical slices. Run relevant tests after each slice.

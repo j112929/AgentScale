@@ -12,8 +12,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: pip install -e '.[dev]'
-      - run: pytest -q -m 'not ray'
-      - run: ruff check agentscale tests examples
+      - run: pytest -q -m 'not ray and not docker'
+      - run: ruff check agentscale tests examples tools
       - run: mypy agentscale
       - run: agentscale simulate --scenario dynamic --duration 30 --output /tmp/simulation.json
   ray:
@@ -27,3 +27,29 @@ jobs:
       - run: pip install -e '.[dev,ray]'
       - run: pytest -q -m ray tests/test_ray_integration.py
       - run: python examples/ray_sandbox.py
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -e '.[dev]'
+      - run: docker pull python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c
+      - run: pytest -q -m docker
+      - run: python examples/container_coding.py
+      - run: python tools/check_verl_contract.py --download --execute
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -e '.[dev,release]' 'setuptools>=77'
+      - run: python tools/build_release.py --output dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agentscale-0.1.0rc1
+          path: dist/*

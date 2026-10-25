@@ -1,0 +1,35 @@
+{
+  "inference": "scripted-fixture",
+  "real_containers": true,
+  "result": {
+    "problem_id": "repair-add",
+    "passed": true,
+    "attempts": [
+      {
+        "task_id": "repair-add-0",
+        "status": "failed",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "test_add (test_solution.Tests.test_add) ... FAIL\n\n======================================================================\nFAIL: test_add (test_solution.Tests.test_add)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/test_solution.py\", line 5, in test_add\n    self.assertEqual(add(2, 3), 5)\nAssertionError: -1 != 5\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (failures=1)\n",
+        "duration_s": 0.12376166700000002,
+        "truncated": false,
+        "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+      },
+      {
+        "task_id": "repair-add-1",
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "test_add (test_solution.Tests.test_add) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+        "duration_s": 0.12317579200000006,
+        "truncated": false,
+        "image_id": "sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c"
+      }
+    ],
+    "files": {
+      "solution.py": "def add(a,b):\n    return a + b\n",
+      "test_solution.py": "import unittest\nfrom solution import add\nclass Tests(unittest.TestCase):\n    def test_add(self):\n        self.assertEqual(add(2, 3), 5)\n        self.assertEqual(add(-2, 3), 1)\n"
+    },
+    "policy_version": 0
+  }
+}

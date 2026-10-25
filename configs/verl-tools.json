@@ -1,0 +1,22 @@
+{
+  "tools": [{
+    "class_name": "agentscale.integrations.verl_tool.ContainerCodeTool",
+    "config": {"type": "native", "workers": 2, "max_instances": 128},
+    "tool_schema": {
+      "type": "function",
+      "function": {
+        "name": "run_code_tests",
+        "description": "Execute source files and tests in an ephemeral restricted Python container.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "files": {"type": "object", "description": "Relative source paths mapped to complete contents."},
+            "command": {"type": "array", "description": "Program and arguments inside the container.", "items": {"type": "string"}},
+            "timeout_s": {"type": "number", "description": "Execution deadline in seconds, at most 300."}
+          },
+          "required": ["files", "command"]
+        }
+      }
+    }
+  }]
+}

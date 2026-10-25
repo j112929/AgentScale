@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import os
 from collections.abc import Callable
 from dataclasses import asdict
 from pathlib import Path
@@ -73,6 +74,18 @@ def run(
 def main() -> None:
     parser = argparse.ArgumentParser(prog="agentscale")
     sub = parser.add_subparsers(dest="command", required=True)
+    p = sub.add_parser("sandbox", help="execute a JSON CodeTask in a restricted container")
+    p.add_argument("--task", type=Path, required=True)
+    p.add_argument("--output", type=Path)
+    p = sub.add_parser("vllm-inspect", help="read vLLM version, health and per-model metrics")
+    p.add_argument("--url", required=True)
+    p.add_argument("--model", required=True)
+    p.add_argument("--output", type=Path)
+    p = sub.add_parser("container-benchmark", help="measure local container task scheduling")
+    p.add_argument("--output", type=Path)
+    p = sub.add_parser("compare-rl", help="compare paired, measured RL result records")
+    p.add_argument("--input", type=Path, required=True)
+    p.add_argument("--output", type=Path)
     for command in ("simulate", "benchmark", "plan"):
         p = sub.add_parser(command)
         p.add_argument("--scenario", choices=SCENARIOS, default="balanced")
@@ -88,6 +101,37 @@ def main() -> None:
         if command == "benchmark":
             p.add_argument("--seeds", type=int, nargs="+", default=[42, 43, 44])
     args = parser.parse_args()
+    if args.command in ("sandbox", "vllm-inspect", "container-benchmark", "compare-rl"):
+        if args.command == "sandbox":
+            from .sandbox import CodeTask, DockerSandbox
+
+            runtime_output = asdict(
+                DockerSandbox().execute(CodeTask(**json.loads(args.task.read_text())))
+            )
+        elif args.command == "vllm-inspect":
+            from .vllm_adapter import VLLMAdapter
+
+            client = VLLMAdapter(args.url, args.model, api_key=os.getenv("VLLM_API_KEY"))
+            runtime_output = {
+                "healthy": client.health(),
+                "version": client.version(),
+                "metrics": asdict(client.collect()),
+            }
+        else:
+            from .runtime_benchmark import compare_rl_runs, container_benchmark
+
+            runtime_output = (
+                container_benchmark()
+                if args.command == "container-benchmark"
+                else compare_rl_runs(json.loads(args.input.read_text()))
+            )
+        payload = json.dumps(runtime_output, indent=2, allow_nan=False)
+        if args.output:
+            args.output.write_text(payload + "\n")
+        print(payload)
+        if args.command == "sandbox" and runtime_output["status"] != "passed":
+            raise SystemExit(1)
+        return
     cfg = ControllerConfig(interval_s=args.interval)
     if args.command == "benchmark":
         from .benchmarks import benchmark

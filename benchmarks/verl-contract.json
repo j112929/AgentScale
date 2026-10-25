@@ -1,0 +1,10 @@
+{
+  "upstream": "verl",
+  "version": "0.6.1",
+  "revision": "d62da4950573d7a4b7ef2362337952e7ab59e78d",
+  "contract": "BaseTool lifecycle + native ToolResponse",
+  "real_container": true,
+  "full_training": false,
+  "status": "passed",
+  "source_hashes_verified": true
+}
