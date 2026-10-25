@@ -3,12 +3,27 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12', '3.13']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: ${{ matrix.python-version }}
       - run: pip install -e '.[dev]'
-      - run: pytest -q
-      - run: ruff check agentscale tests
+      - run: pytest -q -m 'not ray'
+      - run: ruff check agentscale tests examples
       - run: mypy agentscale
+      - run: agentscale simulate --scenario dynamic --duration 30 --output /tmp/simulation.json
+  ray:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -e '.[dev,ray]'
+      - run: pytest -q -m ray tests/test_ray_integration.py
+      - run: python examples/ray_sandbox.py

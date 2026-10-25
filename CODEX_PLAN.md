@@ -5,6 +5,23 @@ Build an open-source, framework-extensible **global resource scheduler for Agent
 
 This is an orchestration/control-plane project, **not** a new RL algorithm, inference engine, container runtime, or Kubernetes scheduler.
 
+## Implementation status (2026-10-24)
+
+- MVP source recovered from the initial Git commit `a82f451`.
+- **M4.5 implemented:** periodic telemetry and replanning, dynamic workload shifts,
+  confirmation hysteresis, cooldown, switching-cost checks, safe draining,
+  compensation, measured-performance rollback and failure audit.
+- **M5.1 Actor-pool slice implemented:** optional Ray 2.50.1 adapter with logical
+  CPU/memory reservations, scaling, bounded synthetic tasks, deadlines, worker
+  replacement, offline fault injection and real local Actor integration tests.
+- **Benchmark slice implemented:** paired-seed synthetic comparisons, initial-only
+  baseline, stability ablation, allocation traces and published raw results.
+- **Still pending:** M5.2 container isolation, vLLM/verl integration, real GPU migration,
+  measured production telemetry/Prometheus, durable controller recovery, real-runtime
+  RL benchmarks and the full M7 release checklist. This is not completion of M5–M7.
+
+Commands, semantics and limitations are in `README.md` and `docs/`.
+
 ## Non-negotiable engineering rules
 1. Inspect the repository before editing. If it is empty, bootstrap a minimal Python package.
 2. Work in small, testable vertical slices. Run relevant tests after each slice.

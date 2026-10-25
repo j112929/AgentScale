@@ -1,4 +1,6 @@
 """Typed scheduling state and resource constraints. Units are explicit."""
+
+import math
 from dataclasses import dataclass, field
 from typing import Protocol
 
@@ -43,6 +45,7 @@ class Snapshot:
     sandbox_queue: int = 0
     training_buffer: int = 0
     timestamp_s: float = 0.0
+    trained_samples_per_s: float | None = None
 
 
 @dataclass(frozen=True)
@@ -65,8 +68,51 @@ class ResourceAdapter(Protocol):
 
 def validate(allocation: Allocation, capacity: Capacity, workload: Workload) -> list[str]:
     errors: list[str] = []
-    if min(allocation.inference_gpus, allocation.training_gpus,
-           allocation.sandbox_workers, allocation.rollout_concurrency) < 1:
+    counts = (
+        allocation.inference_gpus,
+        allocation.training_gpus,
+        allocation.sandbox_workers,
+        allocation.rollout_concurrency,
+        capacity.gpus,
+        capacity.cpu_cores,
+        capacity.memory_gb,
+        workload.steps,
+        workload.batch_size,
+        workload.sandbox_cpu,
+        workload.sandbox_memory_gb,
+        workload.max_staleness,
+    )
+    if any(type(n) is not int for n in counts):
+        return ["resource counts and workload counts must be integers"]
+    demands = (
+        workload.arrival_per_s,
+        workload.inference_s,
+        workload.sandbox_s,
+        workload.training_s,
+        workload.inference_gpu_efficiency,
+    )
+    if any(not math.isfinite(n) or n <= 0 for n in demands):
+        errors.append("service demands, efficiency and arrival rate must be finite and positive")
+    if (
+        min(
+            capacity.gpus,
+            capacity.cpu_cores,
+            capacity.memory_gb,
+            workload.sandbox_cpu,
+            workload.sandbox_memory_gb,
+        )
+        < 1
+    ):
+        errors.append("capacity and sandbox resource demands must be positive")
+    if (
+        min(
+            allocation.inference_gpus,
+            allocation.training_gpus,
+            allocation.sandbox_workers,
+            allocation.rollout_concurrency,
+        )
+        < 1
+    ):
         errors.append("all allocation fields must be positive")
     if allocation.inference_gpus + allocation.training_gpus > capacity.gpus:
         errors.append("GPU overcommit")
