@@ -8,12 +8,19 @@ description = "Offline-first global resource scheduling research platform for ag
 requires-python = ">=3.11"
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.10"]
+ray = ["ray==2.50.1"]
 [project.scripts]
 agentscale = "agentscale.cli:main"
 [tool.setuptools.packages.find]
 include = ["agentscale*"]
 [tool.ruff]
 line-length = 100
+[tool.ruff.lint.per-file-ignores]
+# External policy/runtime boundaries must compensate and audit all ordinary failures.
+"agentscale/controller.py" = ["BLE001"]
+"agentscale/ray_adapter.py" = ["BLE001"]
 [tool.mypy]
 python_version = "3.11"
 check_untyped_defs = true
+[tool.pytest.ini_options]
+markers = ["ray: real local Ray Actor integration (requires the ray extra)"]

@@ -1,6 +1,12 @@
-"""Offline adapter; production adapters are intentionally not implemented."""
+"""Offline adapter and common safe-point signal. Ray is an optional module."""
+
 from dataclasses import dataclass
+
 from .models import Allocation, Capacity, Workload, validate
+
+
+class SafePointUnavailable(RuntimeError):
+    """A supported transition must wait for in-flight work to drain."""
 
 
 @dataclass
@@ -16,7 +22,7 @@ class FakeAdapter:
     def apply(self, allocation: Allocation) -> None:
         errors = validate(allocation, self.capacity, self.workload)
         if errors:
-            raise ValueError('; '.join(errors))
+            raise ValueError("; ".join(errors))
         if allocation != self.allocation:
             self.allocation = allocation
             self.writes += 1

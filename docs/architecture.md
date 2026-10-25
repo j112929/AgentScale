@@ -1,15 +1,40 @@
 # Architecture and scope
 
-`models.py` defines unit-bearing capacity, workload, allocation, snapshot, plan, and adapter
-contracts. `simulator.py` is a seeded event queue with four stages. `policies.py` contains
-three interchangeable allocation planners. `adapters.py` contains an idempotent in-memory
-adapter and non-mutating dry-run validation. `cli.py` runs scenarios and emits JSON.
+`models.py` defines capacity, workload, allocation, snapshot, plan and adapter contracts.
+`policies.py` provides three deterministic planners. `controller.py` separates periodic
+replanning from resource execution and implements stability guards and compensation.
+`simulator.py` owns explicit stage queues and a seeded event loop with safe draining.
+`adapters.py` provides an idempotent in-memory adapter and the safe-point signal.
+`ray_adapter.py` optionally manages real CPU/memory Actors for trusted synthetic tasks.
+`scenarios.py`, `cli.py` and `benchmarks.py` supply reproducible profiles, traces and comparisons.
 
-**ADR-001: Simulator first.** Scheduling logic is developed without infrastructure costs;
-real system behavior must eventually calibrate the simulator.
+```mermaid
+flowchart LR
+  T[Telemetry snapshot] --> C[Dynamic controller]
+  C --> P[Scheduling policy]
+  P --> G[Validation and stability guards]
+  G --> A[Resource adapter]
+  A --> S[Simulator or Ray Actor pool]
+  S --> T
+  A --> R[Verify and compensate]
+  R --> C
+```
 
-**ADR-002: Ray first.** Future integrations should prefer public Ray and verl interfaces,
-then add Kubernetes/Kueue support; no upstream API compatibility is claimed today.
+**ADR-001: Simulator first.** The default package runs without Ray or GPUs. Demand
+profiles and synthetic costs are explicit assumptions, not measurements of real RL.
 
-Next: workload shifts during a run, stage queue depth telemetry, safe-point controller,
-trace replay, Prometheus, and verified external runtime adapters.
+**ADR-002: Optional Ray.** Integration uses public Actor APIs against pinned Ray 2.50.1.
+Ray owns worker processes; this project owns only its registered pool. Resource
+reservations are logical. Arbitrary or untrusted code execution is not offered.
+
+**ADR-003: Drain before disruptive change.** Simulated GPU reallocation waits for
+in-flight stages to drain; the Ray adapter rejects all GPU changes. Real training
+gang safe-point coordination must be implemented by a future runtime adapter.
+
+**ADR-004: In-memory controller.** Input snapshots and operation generations are
+journaled in memory. Apply failures compensate to the previous allocation; failed
+compensation blocks writes. Durable recovery, multi-driver control and leader
+election remain outside this slice.
+
+See [control loop](control-loop.md), [Ray integration](ray-sandbox.md) and
+[benchmark methodology](benchmarks.md).

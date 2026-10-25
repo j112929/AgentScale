@@ -1,9 +1,10 @@
 import pytest
+
 from agentscale.adapters import FakeAdapter, dry_run
+from agentscale.cli import run
 from agentscale.models import Allocation, Capacity, Snapshot, Workload, validate
 from agentscale.policies import BottleneckAwarePolicy, IndependentAutoscalePolicy, StaticPolicy
 from agentscale.simulator import simulate
-from agentscale.cli import run
 
 
 def test_repeatable_simulation():
