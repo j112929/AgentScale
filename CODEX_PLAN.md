@@ -41,6 +41,25 @@ Commands, semantics and limitations are in `README.md` and `docs/`.
 This iteration follows the user's local-validation scope. It does not mark the entire
 M5–M7 roadmap complete. See `docs/runtime-integrations.md` and `docs/release.md`.
 
+## Experimental retrieval extension (2026-10-25)
+
+Implemented on `codex/adaptive-retrieval-planning`, stacked on the unmerged PR #2
+head `64123c2`. This extends the project; it does not complete the original GPU
+runtime roadmap or replace the Agentic RL scheduler.
+
+| Phase | Delivered slice | Validation |
+| --- | --- | --- |
+| 0 | Current source/interface/CLI/test audit and stacked integration design | Baseline 112 offline/local-HTTP tests |
+| 1 | Typed queries/plans/resources, four templates, deterministic CPU-capable fake backend | 19 retrieval contract/determinism tests |
+| 2–3 | Separate estimators, bounded adaptive planner, constrained optimizer with rejection reasons | 37 cumulative retrieval tests |
+| 4–5 | Shared ledger, policy/write fences including RL rollback, queue-aware synthetic controller and same-clock RL hooks | 65 cumulative retrieval tests at phase commit; further rollback test in final verification |
+| Evaluation/docs | Separate CLI, paired seven-variant/two-profile benchmark, raw 42-trial report and compatibility/metric docs | Full checks recorded in docs/retrieval-audit.md |
+
+Real retrieval backends, labeled retrieval evaluation and an actual end-to-end RAG
+agent benchmark are pending. Synthetic quality, success, utilization and accounting
+costs are not real-world measurements. Fixed hybrid outperforms adaptive variants
+on completion/cost in the checked-in profiles; see docs/retrieval-benchmarks.md.
+
 ## Non-negotiable engineering rules
 1. Inspect the repository before editing. If it is empty, bootstrap a minimal Python package.
 2. Work in small, testable vertical slices. Run relevant tests after each slice.

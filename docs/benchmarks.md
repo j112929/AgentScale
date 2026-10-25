@@ -109,3 +109,10 @@ workloads, heavy-tail/cold-start sweeps, larger seed sets and confidence interva
 real cost accounting, reward guardrails and upstream verl comparisons. The full M6
 research validation milestone remains open. The original root `benchmark.json` is
 an older MVP artifact and must not be mixed with this revised simulator's results.
+
+## Optional retrieval experiments
+
+The separate `agentscale retrieval-benchmark` command compares synthetic retrieval
+plans while the four-stage RL simulator runs. Its quality, task success, latency,
+utilization and costs are model values. It is not a GPU or RAG quality benchmark.
+See [retrieval methodology and negative results](retrieval-benchmarks.md).

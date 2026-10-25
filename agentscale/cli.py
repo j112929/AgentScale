@@ -74,6 +74,9 @@ def run(
 def main() -> None:
     parser = argparse.ArgumentParser(prog="agentscale")
     sub = parser.add_subparsers(dest="command", required=True)
+    from .retrieval.commands import add_commands
+
+    add_commands(sub)
     p = sub.add_parser("sandbox", help="execute a JSON CodeTask in a restricted container")
     p.add_argument("--task", type=Path, required=True)
     p.add_argument("--output", type=Path)
@@ -101,6 +104,20 @@ def main() -> None:
         if command == "benchmark":
             p.add_argument("--seeds", type=int, nargs="+", default=[42, 43, 44])
     args = parser.parse_args()
+    if args.command.startswith("retrieval-"):
+        from .retrieval.commands import execute
+
+        try:
+            retrieval_output = execute(args)
+        except ValueError as exc:
+            parser.error(str(exc))
+        payload = json.dumps(retrieval_output, indent=2, allow_nan=False)
+        if args.output:
+            args.output.write_text(payload + "\n")
+        print(payload)
+        if retrieval_output.get("feasible") is False:
+            raise SystemExit(2)
+        return
     if args.command in ("sandbox", "vllm-inspect", "container-benchmark", "compare-rl"):
         if args.command == "sandbox":
             from .sandbox import CodeTask, DockerSandbox

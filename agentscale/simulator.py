@@ -4,6 +4,7 @@ import heapq
 import math
 import random
 from collections import deque
+from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
 
 from .adapters import FakeAdapter, SafePointUnavailable
@@ -65,6 +66,8 @@ def simulate(
     policy: SchedulingPolicy | None = None,
     controller_config: ControllerConfig | None = None,
     workload_shifts: tuple[tuple[float, Workload], ...] = (),
+    on_snapshot: Callable[[Snapshot], None] | None = None,
+    transition_guard: Callable[[Snapshot], None] | None = None,
 ) -> Result:
     errors = validate(allocation, capacity, workload)
     if errors:
@@ -114,6 +117,8 @@ def simulate(
             nonlocal ready_after
             if target == self.allocation:
                 return
+            if transition_guard is not None:
+                transition_guard(Snapshot(now, target, capacity, self.workload, timestamp_s=now))
             # Pause dispatch and drain all stages; never evict a training batch.
             if infer_busy or sandbox_busy or training_busy:
                 self.draining = True
@@ -234,6 +239,8 @@ def simulate(
             )
             result.telemetry.append(state)
             last_trained, last_telemetry = result.trained, now
+            if on_snapshot is not None:
+                on_snapshot(state)
             if controller is not None:
                 decision = controller.tick(state)
                 result.decisions.append(asdict(decision))

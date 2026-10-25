@@ -71,6 +71,24 @@ at one-third and two-thirds of the requested duration. Other scenarios are
 - Offline fault-injection tests, real local Ray integration tests, JSON traces,
   paired-seed benchmarks and a stability ablation.
 
+## Experimental retrieval planning (offline, optional)
+
+The optional retrieval package adds BM25/vector/hybrid/hybrid-rerank **plan templates**,
+a deterministic fake backend, quality/latency/cost estimators, constrained optimization,
+shared RL resource reservations and a retrieval feedback controller. It runs alongside
+the existing four-stage simulator. All retrieval quality, task success, resource use
+and costs are synthetic/model values; real search engines and RAG evaluation are pending.
+
+```bash
+agentscale retrieval-plan --query 'find evidence' --dry-run
+agentscale retrieval-simulate --duration 30 --rl-policy global --trace --output retrieval.json
+agentscale retrieval-benchmark --duration 30 --seeds 42 43 44 --output retrieval-benchmark.json
+```
+
+See [architecture and compatibility](docs/retrieval.md),
+[benchmarks, including negative results](docs/retrieval-benchmarks.md) and
+[the repository/PR #2 audit](docs/retrieval-audit.md). Existing commands keep their defaults.
+
 ## Try real Ray Actors
 
 Use Python 3.11–3.13 (the pinned Ray wheel is required).
